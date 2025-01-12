@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+<html>
+<head>
+<title>
+    {% block title %}
+    Products
+    {% endblock %}
+</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+{% block content %}
+<h1>Product List</h1>
+<hr>
+    {% if prods %}
+    <table class="table table-bordered table-striped" style="border-collapse: collapse; width: 60%;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date Joined</th>
+            <th>is deleted</th>
+            <th>Action</th>
+            
+
+        </tr>
+        </thead>
+        <tbody>
+        {%for p in prods%}   
+        <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.brand}}</td>
+            <td>{{p.price}}</td>
+            <td>{{p.quantity}}</td>
+            <td>{{p.date_joined}}</td>
+            <td>{{p.is_deleted}}</td>
+
+            <td>
+            <a href="{% url 'get_prod' p.id %}">View/Edit</a>
+            <form action="#" method="get">
+                <input type="submit" value="Delete">
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+
+    </table>
+
+
+    {% else %}
+    NO Record Found
+    {% endif %}
+{% endblock %}
+</hr>        
+</body>
+
+</html>
